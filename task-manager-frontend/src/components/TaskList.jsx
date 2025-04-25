@@ -6,6 +6,8 @@ function TaskList({ tasks, setTasks }){
   const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
 
+  const token = localStorage.getItem("token");
+
   const handleToggleComplete = async (taskId, currentStatus) => {
     const taskToUpdate = tasks.find((t) => t.id === taskId);
 
@@ -15,7 +17,8 @@ function TaskList({ tasks, setTasks }){
     const res = await fetch(`https://localhost:7236/api/task/${taskId}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(updatedTask) //Send the full object
     });
@@ -56,7 +59,8 @@ function TaskList({ tasks, setTasks }){
     const res = await fetch(`https://localhost:7236/api/task/${taskId}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(updatedTask)
     });
@@ -75,6 +79,9 @@ function TaskList({ tasks, setTasks }){
     try {
       const response = await fetch(`https://localhost:7236/api/task/${taskId}`, {
         method: 'DELETE',
+        headers: {
+          Authorization: "Bearer " + token,
+        }
       });
 
       if (response.ok) {

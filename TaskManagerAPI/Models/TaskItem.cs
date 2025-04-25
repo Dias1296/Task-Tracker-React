@@ -10,5 +10,6 @@ namespace TaskManagerAPI.Models
         public string? Description { get; set; }
         public bool isCompleted { get; set; }
         public DateTime createdAt { get; set; } = DateTime.UtcNow;
+        public int UserId { get; set; }
     }
 }

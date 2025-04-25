@@ -1,7 +1,12 @@
 function TaskItem({ task, setTasks }) {
+  const token = localStorage.getItem("token");
+
   const handleDelete = async () => {
     const res = await fetch(`https://localhost:7236/api/task/${task.id}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: "Bearer " + token,
+      }
     });
 
     if (res.ok) {

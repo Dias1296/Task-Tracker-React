@@ -3,6 +3,8 @@ import { useState } from "react";
 function AddTaskForm({ setTasks }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  
+  const token = localStorage.getItem("token");
 
   //Called when the form is submitted
   const handleSubmit = async (e) => {
@@ -18,7 +20,8 @@ function AddTaskForm({ setTasks }) {
     const res = await fetch('https://localhost:7236/api/task', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(newTask)
     });
